@@ -37,5 +37,17 @@ int main()
         while (*shm != '*')
                 sleep(1);
 
+        if (shmdt(shm) < 0)
+        {
+                perror("shmdt");
+                exit(1);
+        }
+
+        if (shmctl(shmid, IPC_RMID, NULL) < 0)
+        {
+                perror("shmctl");
+                exit(1);
+        }
+
         return 0;
 }
